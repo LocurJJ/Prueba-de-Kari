@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Crear ilumina</title>
+
   <style>
     body{
       margin:0;
@@ -65,10 +66,71 @@
 </head>
 
 <body>
-<h1>Crear Ilunmina</h1>
-  <p1>Ilumina tu evento con nosotros</p1>
-  
-  
+
+  <header>
+    <h1>Crear ilumina</h1>
+    <p class="subtitulo">Alquiler de letras luminosas</p>
+  </header>
+
+  <section class="card">
+    <h2>Bienvenidos</h2>
+    <p>Letras de madera luminosas para eventos, cumpleaños, casamientos y momentos especiales.</p>
+    <p>📍 Hurlingham, Buenos Aires</p>
+    <p>📞 15-3431-7772</p>
+  </section>
+
+  <section class="card">
+    <h2>Galería</h2>
+    <img class="foto" id="fotoGaleria" src="https://via.placeholder.com/250x250.png?text=Foto+1">
+
+    <button onclick="fotoAnterior()">⬅</button>
+    <button onclick="fotoSiguiente()">➡</button>
+  </section>
+
+  <section class="card">
+    <h2>Stock disponible</h2>
+    <p>Letras disponibles: <strong id="stock">100</strong></p>
+    <p>Precio por letra: <strong>$10.000</strong></p>
+  </section>
+
+  <section class="card">
+    <button onclick="iniciarSesion()">INICIAR SESIÓN</button>
+  </section>
+
+  <script>
+    let fotos = [
+      "https://via.placeholder.com/250x250.png?text=Foto+1",
+      "https://via.placeholder.com/250x250.png?text=Foto+2",
+      "https://via.placeholder.com/250x250.png?text=Foto+3"
+    ];
+
+    let fotoActual = 0;
+
+    function mostrarFoto(){
+      document.getElementById("fotoGaleria").src = fotos[fotoActual];
+    }
+
+    function fotoSiguiente(){
+      fotoActual++;
+      if(fotoActual >= fotos.length){
+        fotoActual = 0;
+      }
+      mostrarFoto();
+    }
+
+    function fotoAnterior(){
+      fotoActual--;
+      if(fotoActual < 0){
+        fotoActual = fotos.length - 1;
+      }
+      mostrarFoto();
+    }
+
+    function iniciarSesion(){
+      alert("Después armamos la pantalla de usuarios y contraseña");
+    }
+  </script>
+
 </body>
 
 </html>
