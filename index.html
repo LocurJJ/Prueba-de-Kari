@@ -93,9 +93,24 @@
     <p>Precio por letra: <strong>$10.000</strong></p>
   </section>
 
-  <section class="card">
-    <button onclick="iniciarSesion()">INICIAR SESIÓN</button>
-  </section>
+ <section class="card" id="login">
+  <h2>Iniciar sesión</h2>
+
+  <input type="text" id="nombreUsuario" placeholder="Tu nombre">
+  <input type="password" id="claveUsuario" placeholder="Contraseña">
+
+  <button onclick="iniciarSesion()">ENTRAR</button>
+
+  <p id="mensajeLogin"></p>
+</section>
+
+<section class="card" id="panelUsuario" style="display:none;">
+  <h2>Hola, <span id="usuarioActivo"></span></h2>
+  <p>¿Qué querés hacer?</p>
+
+  <button onclick="alert('Después armamos alquiler')">Alquilar letras</button>
+  <button onclick="alert('Después armamos devolución')">Devolver letras</button>
+</section>
 
   <script>
   let fotos = [
@@ -128,9 +143,33 @@
       mostrarFoto();
     }
 
-    function iniciarSesion(){
-      alert("Ingrese usuario");
+function iniciarSesion(){
+  let nombre = document.getElementById("nombreUsuario").value;
+  let clave = document.getElementById("claveUsuario").value;
+
+  if(nombre === "" || clave === ""){
+    document.getElementById("mensajeLogin").innerText = "Completá nombre y contraseña";
+    return;
+  }
+
+  let usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+
+  if(usuarios[nombre]){
+    if(usuarios[nombre] !== clave){
+      document.getElementById("mensajeLogin").innerText = "Contraseña incorrecta";
+      return;
     }
+  } else {
+    usuarios[nombre] = clave;
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  }
+
+  localStorage.setItem("usuarioActivo", nombre);
+
+  document.getElementById("login").style.display = "none";
+  document.getElementById("panelUsuario").style.display = "block";
+  document.getElementById("usuarioActivo").innerText = nombre;
+}
   </script>
 
 </body>
